@@ -15,12 +15,19 @@
 #include <unordered_map>
 
 #include "Vertex.hpp"
+#include "Edge.hpp"
 
 using namespace std;
 
 class ListUDG {
 private:
     shared_ptr<unordered_map<string, shared_ptr<Vertex>>> allVertexes;
+    shared_ptr<vector<shared_ptr<Edge>>> allEdges;
+    unsigned vertexNumber;
+    unsigned edgeNumber;
+    
+public:
+    void creatGraph();
 };
 
 

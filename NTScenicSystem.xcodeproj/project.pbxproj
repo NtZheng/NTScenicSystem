@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A4B391F1DDEF63F003C1969 /* Edge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A4B391D1DDEF63F003C1969 /* Edge.cpp */; };
 		6A91252D1DDEEC1700C482E6 /* ListUDG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A91252B1DDEEC1700C482E6 /* ListUDG.cpp */; };
 		6A9125301DDEECE400C482E6 /* Vertex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A91252E1DDEECE400C482E6 /* Vertex.cpp */; };
 		6AE7873A1DDEA7B800ADE470 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AE787391DDEA7B800ADE470 /* main.cpp */; };
@@ -25,6 +26,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6A4B391D1DDEF63F003C1969 /* Edge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Edge.cpp; sourceTree = "<group>"; };
+		6A4B391E1DDEF63F003C1969 /* Edge.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Edge.hpp; sourceTree = "<group>"; };
 		6A91252B1DDEEC1700C482E6 /* ListUDG.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ListUDG.cpp; sourceTree = "<group>"; };
 		6A91252C1DDEEC1700C482E6 /* ListUDG.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ListUDG.hpp; sourceTree = "<group>"; };
 		6A91252E1DDEECE400C482E6 /* Vertex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vertex.cpp; sourceTree = "<group>"; };
@@ -68,6 +71,8 @@
 				6A91252C1DDEEC1700C482E6 /* ListUDG.hpp */,
 				6A91252E1DDEECE400C482E6 /* Vertex.cpp */,
 				6A91252F1DDEECE400C482E6 /* Vertex.hpp */,
+				6A4B391D1DDEF63F003C1969 /* Edge.cpp */,
+				6A4B391E1DDEF63F003C1969 /* Edge.hpp */,
 			);
 			path = NTScenicSystem;
 			sourceTree = "<group>";
@@ -131,6 +136,7 @@
 			files = (
 				6A9125301DDEECE400C482E6 /* Vertex.cpp in Sources */,
 				6A91252D1DDEEC1700C482E6 /* ListUDG.cpp in Sources */,
+				6A4B391F1DDEF63F003C1969 /* Edge.cpp in Sources */,
 				6AE7873A1DDEA7B800ADE470 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
