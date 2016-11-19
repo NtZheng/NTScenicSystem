@@ -36,18 +36,21 @@ void ListUDG::creatGraph() {
         memset(tempString, 128, '\0');
         in.getline(tempString, 128, ' ');
         string name(tempString);
+        cout << name << ' ';
         memset(tempNumber, 16, '\0');
         in.getline(tempNumber, 16, ' ');
         int welcomeStar = atoi(tempNumber);
         memset(tempString, 128, '\0');
         in.getline(tempString, 128, '\n');
-        string information(tempString);
+        string introduction(tempString);
         
         // 将这一个节点存入到allVertexes中
-        
-        
-        
+        tempAllVertexes[name] = make_shared<Vertex>(name, i, welcomeStar, introduction);
     }
+    
+    cout << endl;
+    
+    
     
     
 }
