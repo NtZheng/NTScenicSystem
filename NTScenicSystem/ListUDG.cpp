@@ -30,6 +30,8 @@ void ListUDG::creatGraph() {
     
     cout << "请输入节点个数: " << this->vertexNumber << "请输入边的条数: " << this->edgeNumber << endl;
     
+    cout << "请输入节点的信息: " << endl;
+    
     // 读取每个节点的信息
     for (int i = 0; i < this->vertexNumber; i++) {
         // 分别读取一行中的三个部分
@@ -49,6 +51,33 @@ void ListUDG::creatGraph() {
     }
     
     cout << endl;
+    
+    cout << "请输入边的信息: " << endl;
+    
+    // 读取每条边的信息
+    for (int i = 0; i < this->edgeNumber; i++) {
+        // 分别读取一行中的三个部分
+        memset(tempString, 128, '\0');
+        in.getline(tempString, 128, ' ');
+        string from(tempString);
+        cout << from << ' ';
+        memset(tempString, 128, '\0');
+        in.getline(tempString, 128, ' ');
+        string to(tempString);
+        cout << to << ' ';
+        memset(tempNumber, 16, '\0');
+        in.getline(tempNumber, 16);
+        int distance = atoi(tempNumber);
+        cout << distance << endl;
+        
+        // 将定点与边建立联系
+        shared_ptr<Vertex> fromVertex = tempAllVertexes[from];
+        shared_ptr<Vertex> toVertex = tempAllVertexes[to];
+        shared_ptr<Edge> fromVertexEdge = make_shared<Edge>(from, to, distance);
+        shared_ptr<Edge> toVertexEdge = make_shared<Edge>(to, from, distance);
+        fromVertex->addEdge(fromVertexEdge);
+        toVertex->addEdge(toVertexEdge);
+    }
     
     
     

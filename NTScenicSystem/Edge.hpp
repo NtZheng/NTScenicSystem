@@ -10,9 +10,6 @@
 #define Edge_hpp
 
 #include <stdio.h>
-#include "Vertex.hpp"
-
-using namespace std;
 
 class Edge {
 private:
@@ -20,7 +17,7 @@ private:
     shared_ptr<Vertex> to;
     unsigned distance;
 public:
-    Edge(shared_ptr<Vertex> from, shared_ptr<Vertex> to, unsigned distance) : from(from), to(to), distance(distance){};
+    Edge(shared_ptr<Vertex> from, shared_ptr<Vertex> to, unsigned distance) : from(from), to(to), distance(distance){}
 };
 
 #endif /* Edge_hpp */
