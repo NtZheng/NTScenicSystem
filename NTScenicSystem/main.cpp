@@ -49,8 +49,12 @@ int main(int argc, const char * argv[]) {
             case 9:
                 
                 break;
+            case 0:
+                
+                cout << "成功退出系统" << endl;
+                return 0;
             default:
-                cout << "无法识别该指令，请重新输入:\n";
+                cout << "无法识别该指令，请重新输入:" << endl;
                 break;
         }
     }
