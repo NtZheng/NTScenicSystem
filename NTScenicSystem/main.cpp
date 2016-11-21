@@ -8,6 +8,8 @@
 
 #include <iostream>
 
+#include "ListUDG.hpp"
+
 using namespace std;
 
 
@@ -15,12 +17,13 @@ void printWelcomeWords();
 
 int main(int argc, const char * argv[]) {
     printWelcomeWords();
+    shared_ptr<ListUDG> listUDG = make_shared<ListUDG>();
     while (true) {
         int command;
         cin >> command;
         switch (command) {
             case 1:
-                
+                listUDG->creatGraph();
                 break;
             case 2:
                 

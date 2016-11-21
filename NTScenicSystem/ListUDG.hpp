@@ -27,6 +27,9 @@ private:
     unsigned edgeNumber;
     
 public:
+    // 构造函数（对allVertexes河allEdges进行初始化）
+    ListUDG() : allVertexes(make_shared<unordered_map<string, shared_ptr<Vertex>>>()), allEdges(make_shared<vector<shared_ptr<Edge>>>()){}
+    
     void creatGraph();
 };
 
