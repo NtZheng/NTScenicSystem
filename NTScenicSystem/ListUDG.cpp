@@ -10,7 +10,8 @@
 
 #include <fstream>
 #include <iostream>
-#include <unordered_map>
+
+// public
 
 void ListUDG::creatGraph() {
     auto& tempAllVertexes = *this->allVertexes;
@@ -49,6 +50,8 @@ void ListUDG::creatGraph() {
         
         // 将这一个节点存入到allVertexes中
         tempAllVertexes[name] = make_shared<Vertex>(name, i, welcomeStar, introduction);
+        // 将节点名字存入到vertexNames中
+        vertexNames->push_back(name);
     }
     
     cout << endl << endl;
@@ -78,7 +81,56 @@ void ListUDG::creatGraph() {
         shared_ptr<Edge> toVertexEdge = make_shared<Edge>(toVertex, fromVertex, distance);
         fromVertex->addEdge(fromVertexEdge);
         toVertex->addEdge(toVertexEdge);
+        
+        // 将边存入到allEdges中
+        this->allEdges->push_back(fromVertexEdge);
+        this->allEdges->push_back(toVertexEdge);
     }
     in.close();
     cout << endl<<"创建景点图成功！请继续选择操作:" << endl;
+}
+
+void ListUDG::outputGraph() {
+    if (this->isGraphEmpth()) {
+        return;
+    }
+    this->adjacentMatrix = make_shared<Matrix>(vertexNumber + 1, vector<unsigned>(vertexNumber + 1, 32767));
+    auto& tempAdjacentMatrix = *adjacentMatrix;
+    this->adjacentListToAdjacentMatrix(tempAdjacentMatrix);
+    auto& tempVertexNames = *vertexNames;
+    auto size = allVertexes->size();
+    
+    // 打印输出
+    for (string tempString : tempVertexNames) {
+        printf("%8s", tempString.c_str());
+    }
+    cout << endl;
+    
+    for (size_t j = 0; j < size; j++) {
+        printf("%8s", tempVertexNames[j].c_str());
+        for (size_t k = 0; k < size; k++) {
+            printf("%8d", tempAdjacentMatrix[j][k]);
+        }
+        cout << endl;
+    }
+}
+
+// private
+
+void ListUDG::adjacentListToAdjacentMatrix(Matrix& tempMatrix) {
+    for (shared_ptr<Edge> tempEdge : *this->allEdges) {
+        unsigned int fromIndex = tempEdge->getFromVertex()->getIndex();
+        unsigned int toIndex = tempEdge->getToVertex()->getIndex();
+        tempMatrix[fromIndex][toIndex] = tempEdge->getDistance();
+        tempMatrix[fromIndex][fromIndex] = 0;
+    }
+}
+
+bool ListUDG::isGraphEmpth() {
+    if (!this->allVertexes->empty()) {
+        return false;
+    } else {
+        cout << "您还没有创建图，请输入菜单选项“1”进行创建" << "请重新进行输入: " << endl;
+        return true;
+    }
 }

@@ -23,6 +23,15 @@ private:
     unsigned distance;
 public:
     Edge(shared_ptr<Vertex> from, shared_ptr<Vertex> to, unsigned distance) : from(from), to(to), distance(distance){}
+    shared_ptr<Vertex>& getFromVertex() {
+        return from;
+    }
+    shared_ptr<Vertex>& getToVertex() {
+        return to;
+    }
+    const unsigned getDistance() {
+        return distance;
+    }
 };
 
 #endif /* Edge_hpp */

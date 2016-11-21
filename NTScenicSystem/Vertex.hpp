@@ -35,6 +35,10 @@ public:
     void addEdge(const shared_ptr<Edge> edge) {
         this->listAdj->push_back(edge);
     }
+    
+    unsigned int getIndex() const {
+        return index;
+    }
 };
 
 #endif /* Vertex_hpp */

@@ -26,7 +26,7 @@ int main(int argc, const char * argv[]) {
                 listUDG->creatGraph();
                 break;
             case 2:
-                
+                listUDG->outputGraph();
                 break;
             case 3:
                 
