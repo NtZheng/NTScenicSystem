@@ -51,7 +51,7 @@ void ListUDG::creatGraph() {
         tempAllVertexes[name] = make_shared<Vertex>(name, i, welcomeStar, introduction);
     }
     
-    cout << endl;
+    cout << endl << endl;
     
     cout << "请输入边的信息: " << endl;
     
@@ -80,4 +80,5 @@ void ListUDG::creatGraph() {
         toVertex->addEdge(toVertexEdge);
     }
     in.close();
+    cout << endl<<"创建景点图成功！请继续选择操作:" << endl;
 }
