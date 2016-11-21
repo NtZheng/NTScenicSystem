@@ -67,12 +67,12 @@
 			isa = PBXGroup;
 			children = (
 				6AE787391DDEA7B800ADE470 /* main.cpp */,
-				6A91252B1DDEEC1700C482E6 /* ListUDG.cpp */,
 				6A91252C1DDEEC1700C482E6 /* ListUDG.hpp */,
-				6A91252E1DDEECE400C482E6 /* Vertex.cpp */,
+				6A91252B1DDEEC1700C482E6 /* ListUDG.cpp */,
 				6A91252F1DDEECE400C482E6 /* Vertex.hpp */,
-				6A4B391D1DDEF63F003C1969 /* Edge.cpp */,
+				6A91252E1DDEECE400C482E6 /* Vertex.cpp */,
 				6A4B391E1DDEF63F003C1969 /* Edge.hpp */,
+				6A4B391D1DDEF63F003C1969 /* Edge.cpp */,
 			);
 			path = NTScenicSystem;
 			sourceTree = "<group>";

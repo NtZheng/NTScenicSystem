@@ -10,6 +10,11 @@
 #define Edge_hpp
 
 #include <stdio.h>
+#include <memory>
+
+using std::shared_ptr;
+
+class Vertex;
 
 class Edge {
 private:

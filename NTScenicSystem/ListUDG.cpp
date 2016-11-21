@@ -73,13 +73,10 @@ void ListUDG::creatGraph() {
         // 将定点与边建立联系
         shared_ptr<Vertex> fromVertex = tempAllVertexes[from];
         shared_ptr<Vertex> toVertex = tempAllVertexes[to];
-        shared_ptr<Edge> fromVertexEdge = make_shared<Edge>(from, to, distance);
-        shared_ptr<Edge> toVertexEdge = make_shared<Edge>(to, from, distance);
+        shared_ptr<Edge> fromVertexEdge = make_shared<Edge>(fromVertex, toVertex, distance);
+        shared_ptr<Edge> toVertexEdge = make_shared<Edge>(toVertex, fromVertex, distance);
         fromVertex->addEdge(fromVertexEdge);
         toVertex->addEdge(toVertexEdge);
     }
-    
-    
-    
-    
+    in.close();
 }
