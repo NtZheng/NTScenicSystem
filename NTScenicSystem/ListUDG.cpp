@@ -19,7 +19,7 @@ void ListUDG::creatGraph() {
     char tempNumber[16];
     char tempString[128];
     
-    ifstream in("/Users/Nineteen/Documents/SourceTree/NTScenicSystem/NTScenicSystem/info.txt");
+    ifstream in("/Users/nineteen/Documents/SourceTree/NTScenicSystem.git/NTScenicSystem/info.txt");
     
     // 读取顶点和边的数量
     memset(tempNumber, '\0', 16);// 清空数组内容,达到复用效果
