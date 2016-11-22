@@ -89,8 +89,9 @@ void ListUDG::outputGraph() {
     auto size = allVertexes->size();
     
     // 打印输出
-    for (string tempString : tempVertexNames) {
-        printf("%8s", tempString.c_str());
+    printf("%8s","");
+    for (int i = 0; i < size; i++) {
+        printf("%8s   ",tempVertexNames[i].c_str());
     }
     cout << endl;
     
