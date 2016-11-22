@@ -26,7 +26,7 @@ void ListUDG::creatGraph() {
     
     cout << "请输入节点个数: " << this->vertexNumber << " 请输入边的条数: " << this->edgeNumber << endl;
     
-    cout << "请输入节点的信息: " << endl << endl;
+    cout << "请输入节点的信息: " << endl;
     
     string name;
     unsigned welcomeStar;
@@ -46,9 +46,9 @@ void ListUDG::creatGraph() {
         vertexNames->push_back(name);
     }
     
-    cout << endl << endl;
+    cout << endl;
     
-    cout << "请输入边的信息: " << endl << endl;
+    cout << "请输入边的信息: " << endl;
     
     // 分别读取一行中的三个部分
     string from;
