@@ -10,6 +10,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <stack>
 
 // public
 
@@ -115,6 +116,14 @@ void ListUDG::outputGraph() {
     }
 }
 
+void ListUDG::outputTourGuideLine() {
+    if (this->isGraphEmpth()) {
+        return;
+    }
+    auto& tempTourGuideLine = *this->tourGuideLine;
+    
+}
+
 // private
 
 void ListUDG::adjacentListToAdjacentMatrix(Matrix& tempMatrix) {
@@ -132,5 +141,18 @@ bool ListUDG::isGraphEmpth() {
     } else {
         cout << "您还没有创建图，请输入菜单选项“1”进行创建" << "请重新进行输入: " << endl;
         return true;
+    }
+}
+
+void ListUDG::DFSTraverse(list<shared_ptr<Vertex>>& tempTourGuideLine) {
+    stack<shared_ptr<Vertex>> stackVertexes; // 使用栈存储路线节点
+    size_t count = 1; // 目前已经遍历的节点数量
+    shared_ptr<Vertex> currentVertex = (*this->allVertexes)[(*this->vertexNames)[0]]; // 将定点集中的第一个节点作为导游图的起始点
+    currentVertex->setVisited(true);
+    stackVertexes.push(currentVertex);
+    tempTourGuideLine.push_back(currentVertex);
+    
+    while (!stackVertexes.empty()) {
+        const shared_ptr<list<weak_ptr<Edge>>> tempListAdj = stackVertexes.top()->getListAdj();
     }
 }

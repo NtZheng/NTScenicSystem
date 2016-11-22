@@ -39,6 +39,14 @@ public:
     unsigned int getIndex() const {
         return index;
     }
+    
+    void setVisited(bool visited) {
+        this->isVisited = visited;
+    }
+    
+    const shared_ptr<list<weak_ptr<Edge>>> getListAdj() const {
+        return this->listAdj;
+    }
 };
 
 #endif /* Vertex_hpp */

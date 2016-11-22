@@ -27,18 +27,21 @@ private:
     shared_ptr<vector<shared_ptr<Edge>>> allEdges;
     shared_ptr<Matrix> adjacentMatrix;
     shared_ptr<vector<string>> vertexNames;
+    shared_ptr<list<shared_ptr<Vertex>>> tourGuideLine;
     unsigned vertexNumber;
     unsigned edgeNumber;
     
     void adjacentListToAdjacentMatrix(Matrix&);
     bool isGraphEmpth();
+    void DFSTraverse(list<shared_ptr<Vertex>>&);
 
 public:
     // 构造函数（对allVertexes和allEdges进行初始化）
-    ListUDG() : allVertexes(make_shared<unordered_map<string, shared_ptr<Vertex>>>()), allEdges(make_shared<vector<shared_ptr<Edge>>>()), vertexNames(make_shared<vector<string>>()){}
+    ListUDG() : allVertexes(make_shared<unordered_map<string, shared_ptr<Vertex>>>()), allEdges(make_shared<vector<shared_ptr<Edge>>>()), vertexNames(make_shared<vector<string>>()), tourGuideLine(make_shared<list<shared_ptr<Vertex>>>()){}
     
     void creatGraph();
     void outputGraph();
+    void outputTourGuideLine();
 };
 
 
