@@ -47,6 +47,14 @@ public:
     const shared_ptr<list<weak_ptr<Edge>>> getListAdj() const {
         return this->listAdj;
     }
+    
+    bool visited() const {
+        return this->isVisited;
+    }
+    
+    const string& getName() const {
+        return this->name;
+    }
 };
 
 #endif /* Vertex_hpp */

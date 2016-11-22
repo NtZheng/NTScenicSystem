@@ -121,7 +121,14 @@ void ListUDG::outputTourGuideLine() {
         return;
     }
     auto& tempTourGuideLine = *this->tourGuideLine;
-    
+    this->DFSTraverse(tempTourGuideLine);
+    auto firstSpot = tempTourGuideLine.begin();
+    auto lastSpot = tempTourGuideLine.end();
+    cout << (*firstSpot)->getName();
+    while (++firstSpot != lastSpot) {
+        cout << "->" << (*firstSpot)->getName();
+    }
+    cout << endl;
 }
 
 // private
@@ -154,5 +161,34 @@ void ListUDG::DFSTraverse(list<shared_ptr<Vertex>>& tempTourGuideLine) {
     
     while (!stackVertexes.empty()) {
         const shared_ptr<list<weak_ptr<Edge>>> tempListAdj = stackVertexes.top()->getListAdj();
+        auto firstVertex = tempListAdj->begin();
+        auto lastVertex = tempListAdj->end();
+        
+        // 遍历节点的每一条边
+        while (firstVertex != lastVertex) {
+            if (!(*firstVertex).lock()->getToVertex()->visited()) {
+                currentVertex = (*firstVertex).lock()->getToVertex();
+                currentVertex->setVisited(true);
+                stackVertexes.push(currentVertex);
+                tempTourGuideLine.push_back(currentVertex);
+                
+                if (++count >= allVertexes->size()) {
+                    return;
+                }
+                
+                break;
+                
+            } else {
+                ++firstVertex; // 迭代器迭代
+            }
+        }
+        
+        if (firstVertex == lastVertex) {
+            stackVertexes.pop();
+            if (!stackVertexes.empty()) {
+                tempTourGuideLine.push_back(stackVertexes.top());
+            }
+        }
     }
+    
 }
