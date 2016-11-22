@@ -21,6 +21,7 @@ int main(int argc, const char * argv[]) {
     while (true) {
         int command;
         cin >> command;
+        cout << endl;
         switch (command) {
             case 1:
                 listUDG->creatGraph();

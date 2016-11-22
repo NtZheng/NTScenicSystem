@@ -15,6 +15,7 @@
 // public
 
 void ListUDG::creatGraph() {
+    
     auto& tempAllVertexes = *this->allVertexes;
 
     ifstream in("/Users/Nineteen/Documents/SourceTree/NTScenicSystem/NTScenicSystem/test.txt");
@@ -25,16 +26,15 @@ void ListUDG::creatGraph() {
     
     cout << "请输入节点个数: " << this->vertexNumber << " 请输入边的条数: " << this->edgeNumber << endl;
     
-    cout << "请输入节点的信息: " << endl;
+    cout << "请输入节点的信息: " << endl << endl;
     
-    
+    string name;
+    unsigned welcomeStar;
+    string introduction;
     
     // 读取每个节点的信息
     for (unsigned i = 0; i < this->vertexNumber; i++) {
         // 分别读取一行中的三个部分
-        string name;
-        unsigned welcomeStar;
-        string introduction;
         
         in >> name >> welcomeStar >> introduction;
         
@@ -48,7 +48,7 @@ void ListUDG::creatGraph() {
     
     cout << endl << endl;
     
-    cout << "请输入边的信息: " << endl;
+    cout << "请输入边的信息: " << endl << endl;
     
     // 分别读取一行中的三个部分
     string from;
@@ -59,6 +59,8 @@ void ListUDG::creatGraph() {
     for (int i = 0; i < this->edgeNumber; i++) {
         
         in >> from >> to >> distance;
+        
+        cout << from << "  " << to << "  " << distance << endl;
         
         // 将定点与边建立联系
         shared_ptr<Vertex> fromVertex = tempAllVertexes[from];
