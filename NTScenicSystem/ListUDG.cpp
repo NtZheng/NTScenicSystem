@@ -102,6 +102,8 @@ void ListUDG::outputGraph() {
         }
         cout << endl;
     }
+    cout << endl << endl << "成功输出图的邻接矩阵！请继续选择操作"<< endl;
+    
 }
 
 void ListUDG::outputTourGuideLine() {
@@ -149,13 +151,13 @@ void ListUDG::DFSTraverse(list<shared_ptr<Vertex>>& tempTourGuideLine) {
     
     while (!stackVertexes.empty()) {
         const shared_ptr<list<weak_ptr<Edge>>> tempListAdj = stackVertexes.top()->getListAdj();
-        auto firstVertex = tempListAdj->begin();
-        auto lastVertex = tempListAdj->end();
+        auto firstEdge = tempListAdj->begin();
+        auto lastEdge = tempListAdj->end();
         
         // 遍历节点的每一条边
-        while (firstVertex != lastVertex) {
-            if (!(*firstVertex).lock()->getToVertex()->visited()) {
-                currentVertex = (*firstVertex).lock()->getToVertex();
+        while (firstEdge != lastEdge) {
+            if (!(*firstEdge).lock()->getToVertex()->visited()) {
+                currentVertex = (*firstEdge).lock()->getToVertex();
                 currentVertex->setVisited(true);
                 stackVertexes.push(currentVertex);
                 tempTourGuideLine.push_back(currentVertex);
@@ -167,16 +169,19 @@ void ListUDG::DFSTraverse(list<shared_ptr<Vertex>>& tempTourGuideLine) {
                 break;
                 
             } else {
-                ++firstVertex; // 迭代器迭代
+                ++firstEdge; // 迭代器迭代
             }
         }
         
-        if (firstVertex == lastVertex) {
+        if (firstEdge == lastEdge) {
             stackVertexes.pop();
             if (!stackVertexes.empty()) {
                 tempTourGuideLine.push_back(stackVertexes.top());
             }
         }
     }
-    
+    // 恢复所有节点的访问状态
+    for (auto& tempVertex : *allVertexes) {
+        tempVertex.second->setVisited(false);
+    }
 }

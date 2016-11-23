@@ -30,7 +30,7 @@ int main(int argc, const char * argv[]) {
                 listUDG->outputGraph();
                 break;
             case 3:
-                
+                listUDG->outputTourGuideLine();
                 break;
             case 4:
                 
