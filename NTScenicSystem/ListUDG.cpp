@@ -162,10 +162,12 @@ void ListUDG::DFSTraverse(list<shared_ptr<Vertex>>& tempTourGuideLine) {
                 stackVertexes.push(currentVertex);
                 tempTourGuideLine.push_back(currentVertex);
                 
+                // 防止回路一直绕
                 if (++count >= allVertexes->size()) {
                     return;
                 }
                 
+                // 深度遍历，需要一直往下遍历
                 break;
                 
             } else {
@@ -173,6 +175,7 @@ void ListUDG::DFSTraverse(list<shared_ptr<Vertex>>& tempTourGuideLine) {
             }
         }
         
+        // 某一层遍历结束的临界条件
         if (firstEdge == lastEdge) {
             stackVertexes.pop();
             if (!stackVertexes.empty()) {
