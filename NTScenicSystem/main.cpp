@@ -33,7 +33,7 @@ int main(int argc, const char * argv[]) {
                 listUDG->outputTourGuideLine();
                 break;
             case 4:
-                
+                listUDG->topoSort();
                 break;
             case 5:
                 

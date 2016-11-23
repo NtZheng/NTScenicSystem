@@ -34,6 +34,7 @@ private:
     void adjacentListToAdjacentMatrix(Matrix&);
     bool isGraphEmpth();
     void DFSTraverse(list<shared_ptr<Vertex>>&);
+    void topoSort(vector<int>&);
 
 public:
     // 构造函数（对allVertexes和allEdges进行初始化）
@@ -42,6 +43,7 @@ public:
     void creatGraph();
     void outputGraph();
     void outputTourGuideLine();
+    void topoSort();
 };
 
 

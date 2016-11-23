@@ -121,7 +121,62 @@ void ListUDG::outputTourGuideLine() {
     cout << endl;
 }
 
+void ListUDG::topoSort() {
+    if (isGraphEmpth()) {
+        return;
+    }
+    if (this->tourGuideLine->empty()) {
+        DFSTraverse(*this->tourGuideLine);
+    }
+    vector<int> result(this->vertexNumber);
+    topoSort(result);
+    for (unsigned i = 0; i < this->vertexNumber; i++) {
+        if (result[i] > 0) {
+            cout << "图中有回路" << endl;
+            
+            auto& tempVertexNames = *this->vertexNames;
+            for (unsigned j = i; j < this->vertexNumber; j++) {
+                if (result[j] > 0) {
+                    cout << tempVertexNames[j] << " ";
+                }
+            }
+            cout << endl;
+            return;
+        }
+    }
+    cout << "图中没有回路" << endl;
+}
+
 // private
+
+void ListUDG::topoSort(vector<int>& result) {
+    shared_ptr<Matrix> matrix = make_shared<Matrix>(this->vertexNumber, vector<unsigned>(this->vertexNumber, 0)); // 存储连接关系的矩阵
+    shared_ptr<vector<int>> inDegree = make_shared<vector<int>>(this->vertexNumber, 0); // 存储入度
+    
+    auto& tempMatrix = *matrix;
+    auto& tempInDegree = *inDegree;
+    auto begin = this->tourGuideLine->begin();
+    auto after = begin;
+    auto end = this->tourGuideLine->end();
+    while (++after != end) {
+        unsigned from = (*begin++)->getIndex();
+        unsigned in = (*after)->getIndex();
+        ++tempMatrix[from][in]; // 保存连接关系
+        ++tempInDegree[in]; // 保存入度
+    }
+
+    for (unsigned j = 0; j < this->vertexNumber; j++) {
+        if (tempInDegree[j] == 0) {
+            tempInDegree[j]--;
+            for (unsigned k = 0; k < this->vertexNumber; k++) {
+                if (tempMatrix[j][k] == 1) {
+                    tempInDegree[k]--;
+                }
+            }
+        }
+    }
+    result = tempInDegree;
+}
 
 void ListUDG::adjacentListToAdjacentMatrix(Matrix& tempMatrix) {
     for (shared_ptr<Edge> tempEdge : *this->allEdges) {
