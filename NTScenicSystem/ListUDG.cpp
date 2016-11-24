@@ -167,7 +167,15 @@ void ListUDG::miniDistance() {
     vector<unsigned int> shortestPathTable(this->vertexNumber);
     vector<unsigned int> path(this->vertexNumber);
     shortestPathDijkstra(startIndex, path, shortestPathTable);
-    outPutShortestPath(endIndex, path, shortestPathTable);
+    outputShortestPath(endIndex, path, shortestPathTable);
+}
+
+void ListUDG::outputRoadPlanning() {
+    vector<unsigned> newVertexes(this->vertexNumber, 0);
+    vector<shared_ptr<Edge>> newEdgeSet;
+    auto& tempAllVertexes = *this->allVertexes;
+    auto& tempVertexNames = *this->vertexNames;
+    
 }
 
 // private
@@ -210,7 +218,7 @@ void ListUDG::shortestPathDijkstra(unsigned startIndex, vector<unsigned>& path, 
     }
 }
 
-void ListUDG::outPutShortestPath(unsigned endIndex, vector<unsigned>& path, vector<unsigned>& shortestPathTable) {
+void ListUDG::outputShortestPath(unsigned endIndex, vector<unsigned>& path, vector<unsigned>& shortestPathTable) {
     vector<unsigned int> result;
     auto& tempVertexNames = *this->vertexNames;
     unsigned int i = endIndex;

@@ -36,7 +36,7 @@ private:
     void DFSTraverse(list<shared_ptr<Vertex>>&);
     void topoSort(vector<int>&);
     void shortestPathDijkstra(unsigned, vector<unsigned>&, vector<unsigned>&);
-    void outPutShortestPath(unsigned, vector<unsigned>&, vector<unsigned>&);
+    void outputShortestPath(unsigned, vector<unsigned>&, vector<unsigned>&);
 
 public:
     // 构造函数（对allVertexes和allEdges进行初始化）
@@ -47,6 +47,7 @@ public:
     void outputTourGuideLine();
     void topoSort();
     void miniDistance();
+    void outputRoadPlanning();
 };
 
 
