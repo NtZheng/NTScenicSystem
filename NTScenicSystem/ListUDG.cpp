@@ -158,11 +158,21 @@ void ListUDG::topoSort(vector<int>& result) {
     auto begin = this->tourGuideLine->begin();
     auto after = begin;
     auto end = this->tourGuideLine->end();
+    unsigned startIndex = (*begin)->getIndex();
     while (++after != end) {
         unsigned from = (*begin++)->getIndex();
         unsigned in = (*after)->getIndex();
         ++tempMatrix[from][in]; // 保存连接关系
         ++tempInDegree[in]; // 保存入度
+    }
+    
+    // 特殊代码（由于这个景点图中的每个顶点都入度不为1，所以需要事先处理一个顶点）
+    tempInDegree[startIndex] = -1;
+    for (unsigned i = 0; i < this->vertexNumber; i++) {
+        if (tempMatrix[startIndex][i] == 1) {
+            --tempInDegree[i];
+        }
+        tempMatrix[i][startIndex] = 0;
     }
 
     for (unsigned j = 0; j < this->vertexNumber; j++) {
