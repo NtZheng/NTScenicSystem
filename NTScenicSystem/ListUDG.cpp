@@ -214,11 +214,14 @@ void ListUDG::outPutShortestPath(unsigned endIndex, vector<unsigned>& path, vect
     vector<unsigned int> result;
     auto& tempVertexNames = *this->vertexNames;
     unsigned int i = endIndex;
+    // 从endIndex位置切断，保存前面的数组到result中（逆序保存）
     do {
         result.push_back(i);
         i = path[i];
     } while (i != -1);
-    i = result.size() - 1;
+    
+    // 逆序打印
+    i = (unsigned int)(result.size() - 1);
     while (i > 0) {
         cout << tempVertexNames[result[i]] << "->";
         i--;
