@@ -18,7 +18,7 @@ void ListUDG::creatGraph() {
     
     auto& tempAllVertexes = *this->allVertexes;
 
-    ifstream in("/Users/Nineteen/Documents/SourceTree/NTScenicSystem/NTScenicSystem/test.txt");
+    ifstream in("/Users/nineteen/Documents/SourceTree/NTScenicSystem.git/NTScenicSystem/test.txt");
     
     in >> this->vertexNumber >> this->edgeNumber;
     
@@ -102,7 +102,7 @@ void ListUDG::outputGraph() {
         }
         cout << endl;
     }
-    cout << endl << endl << "成功输出图的邻接矩阵！请继续选择操作"<< endl;
+    cout << endl << "成功输出图的邻接矩阵！请继续选择操作"<< endl;
     
 }
 
@@ -119,6 +119,7 @@ void ListUDG::outputTourGuideLine() {
         cout << "->" << (*firstSpot)->getName();
     }
     cout << endl;
+    cout << endl << "成功输出导游路线图！请继续选择操作"<< endl;
 }
 
 void ListUDG::topoSort() {
@@ -141,13 +142,68 @@ void ListUDG::topoSort() {
                 }
             }
             cout << endl;
+            cout << endl << "请继续选择操作："<< endl;
             return;
         }
     }
     cout << "图中没有回路" << endl;
+    cout << endl << "请继续选择操作："<< endl;
+}
+
+void ListUDG::miniDistance() {
+    if (isGraphEmpth()) {
+        return;
+    }
+    cout << "请输入要查询的两个景点的名称：";
+    string from, to;
+    cin >> from >> to;
+    if (from == to) {
+        cout << from << "->" << to << endl;
+        cout << "最短路径：" << 0 << endl;
+        return;
+    }
+    unsigned int startIndex = this->allVertexes->at(from)->getIndex();
+    unsigned int endIndex = this->allVertexes->at(to)->getIndex();
+    vector<unsigned int> shortestPathTable(vertexNumber);
+    vector<unsigned int> path(vertexNumber);
+    shortestPathDijkstra(startIndex, path, shortestPathTable);
+    outPutShortestPath(endIndex, path, shortestPathTable);
 }
 
 // private
+
+void ListUDG::shortestPathDijkstra(unsigned startIndex, vector<unsigned>& path, vector<unsigned> & shortestPathTable) {
+    this->adjacentMatrix = make_shared<Matrix>(this->vertexNumber, vector<unsigned>(this->vertexNumber ,32767));
+    this->adjacentListToAdjacentMatrix(*this->adjacentMatrix);
+    auto& tempMatrix = *this->adjacentMatrix;
+    unsigned v, w, k = 0, min, num = this->vertexNumber;
+    vector<int> final(num);
+    // 初始化
+    for (v = 1; v < num; v++) {
+        final[v] = 0;
+        shortestPathTable[v] = tempMatrix[startIndex][v];
+        path[v] = startIndex;
+    }
+    final[startIndex] = 1;
+    path[startIndex] = 0;
+    // 主循环
+    for (v = 1; v < num; v++) {
+        min = 65535;
+        for (w = 1; w < num; w++) {
+            if (!final[w] && shortestPathTable[w] < min) {
+                k = w;
+                min = shortestPathTable[w];
+            }
+        }
+        final[k] = 1;
+        for (w = 1; w < num; w++) {
+            if (!final[w] && (min + tempMatrix[k][w]) < shortestPathTable[w]) {
+                shortestPathTable[w] = min + tempMatrix[k][w];
+                path[w] = k;
+            }
+        }
+    }
+}
 
 void ListUDG::topoSort(vector<int>& result) {
     shared_ptr<Matrix> matrix = make_shared<Matrix>(this->vertexNumber, vector<unsigned>(this->vertexNumber, 0)); // 存储连接关系的矩阵
