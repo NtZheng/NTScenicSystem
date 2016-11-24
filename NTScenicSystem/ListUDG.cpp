@@ -189,7 +189,7 @@ void ListUDG::shortestPathDijkstra(unsigned startIndex, vector<unsigned>& path, 
         path[i] = startIndex;
     }
     final[startIndex] = 1;
-    path[startIndex] = 0;
+    path[startIndex] = -1;
     
     // 主循环
     for (i = 0; i < vertexNumber; i++) {
@@ -217,7 +217,8 @@ void ListUDG::outPutShortestPath(unsigned endIndex, vector<unsigned>& path, vect
     do {
         result.push_back(i);
         i = path[i];
-    } while (i != 0);
+    } while (i != -1);
+    i = result.size() - 1;
     while (i > 0) {
         cout << tempVertexNames[result[i]] << "->";
         i--;
