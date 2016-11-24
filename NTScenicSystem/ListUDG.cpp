@@ -18,7 +18,7 @@ void ListUDG::creatGraph() {
     
     auto& tempAllVertexes = *this->allVertexes;
 
-    ifstream in("/Users/nineteen/Documents/SourceTree/NTScenicSystem.git/NTScenicSystem/test.txt");
+    ifstream in("/Users/Nineteen/Documents/SourceTree/NTScenicSystem/NTScenicSystem/test.txt");
     
     in >> this->vertexNumber >> this->edgeNumber;
     
@@ -164,8 +164,8 @@ void ListUDG::miniDistance() {
     }
     unsigned int startIndex = this->allVertexes->at(from)->getIndex();
     unsigned int endIndex = this->allVertexes->at(to)->getIndex();
-    vector<unsigned int> shortestPathTable(vertexNumber);
-    vector<unsigned int> path(vertexNumber);
+    vector<unsigned int> shortestPathTable(this->vertexNumber);
+    vector<unsigned int> path(this->vertexNumber);
     shortestPathDijkstra(startIndex, path, shortestPathTable);
     outPutShortestPath(endIndex, path, shortestPathTable);
 }
@@ -176,33 +176,54 @@ void ListUDG::shortestPathDijkstra(unsigned startIndex, vector<unsigned>& path, 
     this->adjacentMatrix = make_shared<Matrix>(this->vertexNumber, vector<unsigned>(this->vertexNumber ,32767));
     this->adjacentListToAdjacentMatrix(*this->adjacentMatrix);
     auto& tempMatrix = *this->adjacentMatrix;
-    unsigned v, w, k = 0, min, num = this->vertexNumber;
-    vector<int> final(num);
-    // 初始化
-    for (v = 1; v < num; v++) {
-        final[v] = 0;
-        shortestPathTable[v] = tempMatrix[startIndex][v];
-        path[v] = startIndex;
+    unsigned i, j;
+    unsigned confirmedIndex = 0;
+    unsigned minDistance;
+    unsigned vertexNumber = this->vertexNumber;
+    
+    // 初始化操作
+    vector<int> final(vertexNumber);
+    for (i = 0; i < vertexNumber; i++) {
+        final[i] = 0;
+        shortestPathTable[i] = tempMatrix[startIndex][i];
+        path[i] = startIndex;
     }
     final[startIndex] = 1;
     path[startIndex] = 0;
+    
     // 主循环
-    for (v = 1; v < num; v++) {
-        min = 65535;
-        for (w = 1; w < num; w++) {
-            if (!final[w] && shortestPathTable[w] < min) {
-                k = w;
-                min = shortestPathTable[w];
+    for (i = 0; i < vertexNumber; i++) {
+        minDistance = 32767;
+        for (j = 0; j < vertexNumber; j++) {
+            if (!final[j] && shortestPathTable[j] < minDistance) {
+                confirmedIndex = j;
+                minDistance = shortestPathTable[j];
             }
         }
-        final[k] = 1;
-        for (w = 1; w < num; w++) {
-            if (!final[w] && (min + tempMatrix[k][w]) < shortestPathTable[w]) {
-                shortestPathTable[w] = min + tempMatrix[k][w];
-                path[w] = k;
+        final[confirmedIndex] = 1;
+        for (j = 0; j < vertexNumber; j++) {
+            if (!final[j] && (minDistance + tempMatrix[confirmedIndex][j]) < shortestPathTable[j]) {
+                shortestPathTable[j] = minDistance + tempMatrix[confirmedIndex][j];
+                path[j] = confirmedIndex;
             }
         }
     }
+}
+
+void ListUDG::outPutShortestPath(unsigned endIndex, vector<unsigned>& path, vector<unsigned>& shortestPathTable) {
+    vector<unsigned int> result;
+    auto& tempVertexNames = *this->vertexNames;
+    unsigned int i = endIndex;
+    do {
+        result.push_back(i);
+        i = path[i];
+    } while (i != 0);
+    while (i > 0) {
+        cout << tempVertexNames[result[i]] << "->";
+        i--;
+        cout << tempVertexNames[result[i]] << endl;
+    }
+    cout << "最短距离：" << shortestPathTable[endIndex] << endl;
 }
 
 void ListUDG::topoSort(vector<int>& result) {

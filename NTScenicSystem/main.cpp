@@ -36,7 +36,7 @@ int main(int argc, const char * argv[]) {
                 listUDG->topoSort();
                 break;
             case 5:
-                
+                listUDG->miniDistance();
                 break;
             case 6:
                 
