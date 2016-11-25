@@ -175,7 +175,32 @@ void ListUDG::outputRoadPlanning() {
     vector<shared_ptr<Edge>> newEdgeSet;
     auto& tempAllVertexes = *this->allVertexes;
     auto& tempVertexNames = *this->vertexNames;
+    unsigned count = 0;
+    newVertexes[0] = 1; // 将第一个点标记为已经构建路线
+    while (++count < this->vertexNumber) {
+        unsigned index, distance = 32767;
+        shared_ptr<Edge> minPowerEdge = nullptr;
+        for (int i = 0; i < this->vertexNumber; i++) {
+            if (newVertexes[i] == 1){
+                const shared_ptr<list<weak_ptr<Edge>>> tempListAdj = tempAllVertexes[tempVertexNames[i]]->getListAdj();
+                auto firstEdge = tempListAdj->begin();
+                auto lastEdge = tempListAdj->end();
+                while (firstEdge++ != lastEdge) {
+                    index = (*firstEdge).lock()->getToVertex()->getIndex();
+                    if (newVertexes[index] == 0 && (*firstEdge).lock()->getDistance() < distance) {
+                        distance = (*firstEdge).lock()->getDistance();
+                        minPowerEdge = (*firstEdge).lock();
+                    }
+                }
+            }
+        }
+        newVertexes[minPowerEdge->getToVertex()->getIndex()] = 1;
+        newEdgeSet.push_back(minPowerEdge);
+    }
     
+    for (shared_ptr<Edge> edge : newEdgeSet) {
+        cout << "从" << edge->getFromVertex()->getName() << "到" << edge->getToVertex()->getName() << "修一条路" << endl;
+    }
 }
 
 // private
@@ -236,6 +261,7 @@ void ListUDG::outputShortestPath(unsigned endIndex, vector<unsigned>& path, vect
         cout << tempVertexNames[result[i]] << endl;
     }
     cout << "最短距离：" << shortestPathTable[endIndex] << endl;
+    cout << endl << "请继续选择操作：" << endl;
 }
 
 void ListUDG::topoSort(vector<int>& result) {

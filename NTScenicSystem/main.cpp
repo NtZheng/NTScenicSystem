@@ -39,7 +39,7 @@ int main(int argc, const char * argv[]) {
                 listUDG->miniDistance();
                 break;
             case 6:
-                
+                listUDG->outputRoadPlanning();
                 break;
             case 7:
                 
