@@ -203,7 +203,30 @@ void ListUDG::outputRoadPlanning() {
     cout << endl << "请继续选择操作:";
 }
 
+void ListUDG::sortedByPopularity() {
+    vector<shared_ptr<Vertex>> sortedVertexes;
+    for (auto& vertex : *this->allVertexes) {
+        sortedVertexes.push_back(vertex.second);
+    }
+    
+}
+
 // private
+
+void ListUDG::quickSort(vector<shared_ptr<Vertex>>& vertexes, unsigned from, unsigned to) {
+    
+}
+
+void ListUDG::insertSort(vector<shared_ptr<Vertex>>& vertexes, unsigned from, unsigned to) {
+    if (to - from <= 1) {
+        return;
+    }
+    for (unsigned i = from + 1; i < to; i++) {
+        for (unsigned j = i; j > from && vertexes[j - 1]->getWelcomStar() < vertexes[j]->getWelcomStar(); j--) {
+            swap(vertexes[j-1], vertexes[j]);
+        }
+    }
+}
 
 void ListUDG::shortestPathDijkstra(unsigned startIndex, vector<unsigned>& path, vector<unsigned> & shortestPathTable) {
     this->adjacentMatrix = make_shared<Matrix>(this->vertexNumber, vector<unsigned>(this->vertexNumber ,32767));

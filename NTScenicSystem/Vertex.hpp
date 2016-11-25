@@ -55,6 +55,10 @@ public:
     const string& getName() const {
         return this->name;
     }
+    
+    unsigned getWelcomStar() {
+        return this->welcomeStar;
+    }
 };
 
 #endif /* Vertex_hpp */

@@ -37,6 +37,8 @@ private:
     void topoSort(vector<int>&);
     void shortestPathDijkstra(unsigned, vector<unsigned>&, vector<unsigned>&);
     void outputShortestPath(unsigned, vector<unsigned>&, vector<unsigned>&);
+    void quickSort(vector<shared_ptr<Vertex>>&, unsigned, unsigned);
+    void insertSort(vector<shared_ptr<Vertex>>&, unsigned, unsigned);
 
 public:
     // 构造函数（对allVertexes和allEdges进行初始化）
@@ -48,6 +50,7 @@ public:
     void topoSort();
     void miniDistance();
     void outputRoadPlanning();
+    void sortedByPopularity();
 };
 
 
