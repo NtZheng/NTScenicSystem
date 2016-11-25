@@ -200,18 +200,33 @@ void ListUDG::outputRoadPlanning() {
         cout << "从" << edge->getFromVertex()->getName() << "到" << edge->getToVertex()->getName() << "修一条路" << endl;
     }
     
-    cout << endl << "请继续选择操作:";
+    cout << endl << "请继续选择操作:" << endl;
 }
 
 void ListUDG::sortedByPopularity() {
     vector<shared_ptr<Vertex>> sortedVertexes;
-    for (auto& vertex : *this->allVertexes) {
-        sortedVertexes.push_back(vertex.second);
+    // from和to均代表了序号
+    unsigned from = 0;
+    unsigned to = 3;
+    if (to - from < 4) {
+        int count = 0;
+        for (auto& vertex : *this->allVertexes) {
+            if (count++ < to - from + 1) {
+                sortedVertexes.push_back(vertex.second);
+            } else {
+                break;
+            }
+        }
+    } else {
+        for (auto& vertex : *this->allVertexes) {
+            sortedVertexes.push_back(vertex.second);
+        }
     }
-    quickSort(sortedVertexes, 0, (unsigned)sortedVertexes.size()-1);
+    quickSort(sortedVertexes, from, to);
     for_each(sortedVertexes.begin(), sortedVertexes.end(), [](shared_ptr<Vertex> vertex) {
         cout << vertex->getName() << " " << vertex->getWelcomeStar() << endl;
     });
+    cout << endl << "请继续选择操作:" << endl;
 }
 
 // private
@@ -219,6 +234,7 @@ void ListUDG::sortedByPopularity() {
 void ListUDG::quickSort(vector<shared_ptr<Vertex>>& vertexes, unsigned from, unsigned to) {
     if (to - from < 4) {
         insertSort(vertexes, from, to);
+        return;
     }
     unsigned flagIndex;
     if (from < to) {
@@ -226,7 +242,6 @@ void ListUDG::quickSort(vector<shared_ptr<Vertex>>& vertexes, unsigned from, uns
         this->quickSort(vertexes, from, flagIndex - 1);
         this->quickSort(vertexes, flagIndex + 1, to);
     }
-    
 }
 
 unsigned ListUDG::partitionForQuickSort(vector<shared_ptr<Vertex>>& vertexes, unsigned left, unsigned right) {
@@ -254,8 +269,8 @@ void ListUDG::insertSort(vector<shared_ptr<Vertex>>& vertexes, unsigned from, un
     if (to - from <= 1) {
         return;
     }
-    for (unsigned i = from + 1; i < to; i++) {
-        for (unsigned j = i; j > from && vertexes[j - 1]->getWelcomeStar() < vertexes[j]->getWelcomeStar(); j--) {
+    for (unsigned i = from + 1; i < to + 1; i++) {
+        for (unsigned j = i; j > from && vertexes[j - 1]->getWelcomeStar() > vertexes[j]->getWelcomeStar(); j--) {
             swap(vertexes[j-1], vertexes[j]);
         }
     }
