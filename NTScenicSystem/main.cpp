@@ -42,7 +42,7 @@ int main(int argc, const char * argv[]) {
                 listUDG->outputRoadPlanning();
                 break;
             case 7:
-                
+                listUDG->sortedByPopularity();
                 break;
             case 8:
                 

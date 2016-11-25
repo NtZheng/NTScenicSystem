@@ -56,7 +56,7 @@ public:
         return this->name;
     }
     
-    unsigned getWelcomStar() {
+    unsigned getWelcomeStar() {
         return this->welcomeStar;
     }
 };

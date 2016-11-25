@@ -208,13 +208,46 @@ void ListUDG::sortedByPopularity() {
     for (auto& vertex : *this->allVertexes) {
         sortedVertexes.push_back(vertex.second);
     }
-    
+    quickSort(sortedVertexes, 0, (unsigned)sortedVertexes.size()-1);
+    for_each(sortedVertexes.begin(), sortedVertexes.end(), [](shared_ptr<Vertex> vertex) {
+        cout << vertex->getName() << " " << vertex->getWelcomeStar() << endl;
+    });
 }
 
 // private
 
 void ListUDG::quickSort(vector<shared_ptr<Vertex>>& vertexes, unsigned from, unsigned to) {
+    if (to - from < 4) {
+        insertSort(vertexes, from, to);
+    }
+    unsigned flagIndex;
+    if (from < to) {
+        flagIndex = this->partitionForQuickSort(vertexes, from, to);
+        this->quickSort(vertexes, from, flagIndex - 1);
+        this->quickSort(vertexes, flagIndex + 1, to);
+    }
     
+}
+
+unsigned ListUDG::partitionForQuickSort(vector<shared_ptr<Vertex>>& vertexes, unsigned left, unsigned right) {
+    shared_ptr<Vertex> mark = vertexes[left];
+    unsigned flag = mark->getWelcomeStar();
+    while (left < right) { // 依次往中间收缩
+        while (left < right && vertexes[right]->getWelcomeStar() >= flag) { // 右边的收缩
+            right--;
+        }
+        if (left < right) {
+            vertexes[left++] = vertexes[right];
+        }
+        while (left < right && vertexes[left]->getWelcomeStar() <= flag) { // 左边的收缩
+            left++;
+        }
+        if (left < right) {
+            vertexes[right--] = vertexes[left];
+        }
+    }
+    vertexes[left] = mark;
+    return left;
 }
 
 void ListUDG::insertSort(vector<shared_ptr<Vertex>>& vertexes, unsigned from, unsigned to) {
@@ -222,7 +255,7 @@ void ListUDG::insertSort(vector<shared_ptr<Vertex>>& vertexes, unsigned from, un
         return;
     }
     for (unsigned i = from + 1; i < to; i++) {
-        for (unsigned j = i; j > from && vertexes[j - 1]->getWelcomStar() < vertexes[j]->getWelcomStar(); j--) {
+        for (unsigned j = i; j > from && vertexes[j - 1]->getWelcomeStar() < vertexes[j]->getWelcomeStar(); j--) {
             swap(vertexes[j-1], vertexes[j]);
         }
     }
