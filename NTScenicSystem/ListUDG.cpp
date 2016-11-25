@@ -182,14 +182,12 @@ void ListUDG::outputRoadPlanning() {
         shared_ptr<Edge> minPowerEdge = nullptr;
         for (int i = 0; i < this->vertexNumber; i++) {
             if (newVertexes[i] == 1){
-                const shared_ptr<list<weak_ptr<Edge>>> tempListAdj = tempAllVertexes[tempVertexNames[i]]->getListAdj();
-                auto firstEdge = tempListAdj->begin();
-                auto lastEdge = tempListAdj->end();
-                while (firstEdge++ != lastEdge) {
-                    index = (*firstEdge).lock()->getToVertex()->getIndex();
-                    if (newVertexes[index] == 0 && (*firstEdge).lock()->getDistance() < distance) {
-                        distance = (*firstEdge).lock()->getDistance();
-                        minPowerEdge = (*firstEdge).lock();
+                auto& tempListAdj = *tempAllVertexes[tempVertexNames[i]]->getListAdj();
+                for (weak_ptr<Edge> edge : tempListAdj) {
+                    index = edge.lock()->getToVertex()->getIndex();
+                    if (newVertexes[index] == 0 && edge.lock()->getDistance() < distance) {
+                        distance = edge.lock()->getDistance();
+                        minPowerEdge = edge.lock();
                     }
                 }
             }
@@ -201,6 +199,8 @@ void ListUDG::outputRoadPlanning() {
     for (shared_ptr<Edge> edge : newEdgeSet) {
         cout << "从" << edge->getFromVertex()->getName() << "到" << edge->getToVertex()->getName() << "修一条路" << endl;
     }
+    
+    cout << endl << "请继续选择操作:";
 }
 
 // private
