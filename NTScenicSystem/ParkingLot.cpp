@@ -9,10 +9,11 @@
 #include "ParkingLot.hpp"
 
 #include <iostream>
+#include <time.h>
 
 using namespace std;
 
-void parkingLot::management() {
+void ParkingLot::management() {
     while (true) {
         printWelcomeWords();
         char select;
@@ -29,7 +30,7 @@ void parkingLot::management() {
     }
 }
 
-inline void parkingLot::printWelcomeWords() {
+inline void ParkingLot::printWelcomeWords() {
     cout << "\t\t** 停车场管理程序 **\n";
     cout << "============================================================\n";
     cout << "**\t\t\t\t\t\t\t**\n";
@@ -40,7 +41,7 @@ inline void parkingLot::printWelcomeWords() {
     cout << " 请选择：<A,D,E>:";
 }
 
-void parkingLot::goOutCarStack() {
+void ParkingLot::goOutCarStack() {
     if (carStack.empty()) {
         cout << "停车场是空的" << endl;
         return;
@@ -51,14 +52,14 @@ void parkingLot::goOutCarStack() {
     // 如果便道上有车的情况
     if (popBackCarOutFromStack(license) && !carQueue.empty()) {
         shared_ptr<car> tempCar = carQueue.front();
-        tempCar->startTime = chrono::system_clock::now();
+        tempCar->startTime = time(nullptr);
         carQueue.pop();
         cout << "进场车牌为：" << tempCar->license << endl;
         pushBackCarIntoStack(tempCar);
     }
 }
 
-bool parkingLot::popBackCarOutFromStack(const string& license) {
+bool ParkingLot::popBackCarOutFromStack(const string& license) {
     stack<shared_ptr<car>> tempCarStack;
     shared_ptr<car> tempCar = nullptr;
     unsigned size = (unsigned)carStack.size();
@@ -84,30 +85,31 @@ bool parkingLot::popBackCarOutFromStack(const string& license) {
         return false;
     }
     
-    //auto end = chrono::system_clock::now;
+    time_t endTime = time(nullptr); // 出去的时间
+    time_t durationTime = endTime - tempCar->startTime; // 停车时长
     
     cout << "下面是离开停车场的车辆信息：" << endl;
     cout << "车辆牌号：" << tempCar->license << endl;
-    cout << "出场的时刻：" << endl;
-    cout << "停车时长：" << endl;
-    cout << "停车花费：" << endl;
+    cout << "出场的时刻：" << asctime(localtime(&endTime)) << endl;
+    cout << "停车时长：" <<  asctime(localtime(&durationTime))<<endl;
+    cout << "停车花费：" << this->parkingCost(durationTime) <<endl;
     return true;
 }
 
-void parkingLot::goIntoCarStack() {
+void ParkingLot::goIntoCarStack() {
     string license;
     cout << "进入车牌为：";
     cin >> license;
-    auto time = chrono::system_clock::now();
-    shared_ptr<car> tempCar(new car(license, time));
+    time_t t = time(nullptr);
+    shared_ptr<car> tempCar(new car(license, t));
     pushBackCarIntoStack(tempCar);
 }
 
-void parkingLot::pushBackCarIntoStack(shared_ptr<car> car) {
+void ParkingLot::pushBackCarIntoStack(shared_ptr<car> car) {
     if (carStack.size() < capacity) {
         carStack.push(car);
         
-        cout << "进场的时刻：";
+        cout << "进场的时刻：" << asctime(localtime(&car->startTime));
         cout << "该车已进入停车场，位于：" << carStack.size() << "号车道" << endl;
     } else {
         carQueue.push(car);
@@ -115,6 +117,7 @@ void parkingLot::pushBackCarIntoStack(shared_ptr<car> car) {
     }
 }
 
-inline unsigned long long parkingLot::parkingCost(long long parkingTime) {
+inline unsigned long long ParkingLot::parkingCost(long long parkingTime) {
     return (unsigned long long)parkingTime * 2;
 }
+

@@ -12,21 +12,20 @@
 #include <stdio.h>
 #include <stack>
 #include <queue>
-#include <chrono>
 #include <string>
 
 using namespace std;
 
 struct car {
     string license;
-    chrono::system_clock::time_point startTime;
-    car(string license, chrono::system_clock::time_point startTime) : license(license), startTime(startTime){};
+    time_t startTime;
+    car(string license, time_t startTime) : license(license), startTime(startTime){};
 };
 
 class ParkingLot {
 public:
     void management(); // 总入口
-    parkingLot(unsigned s = 5) : capacity(s) {};
+    ParkingLot(unsigned s = 5) : capacity(s) {};
 private:
     unsigned capacity;
     stack<shared_ptr<car>> carStack;

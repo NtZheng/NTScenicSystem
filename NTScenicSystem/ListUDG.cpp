@@ -18,7 +18,7 @@ void ListUDG::creatGraph() {
     
     auto& tempAllVertexes = *this->allVertexes;
 
-    ifstream in("/Users/nineteen/Documents/SourceTree/NTScenicSystem.git/NTScenicSystem/test.txt");
+    ifstream in("/Users/Nineteen/Documents/SourceTree/NTScenicSystem/NTScenicSystem/test.txt");
     
     in >> this->vertexNumber >> this->edgeNumber;
     
