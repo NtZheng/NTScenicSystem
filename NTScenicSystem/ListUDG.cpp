@@ -251,6 +251,10 @@ void ListUDG::searchWithKeyWords() {
     cout << endl << "请继续选择操作：" << endl;
 }
 
+void ListUDG::parkingLotManagement() {
+    
+}
+
 // private
 
 void ListUDG::queryWords(const string& key, vector<shared_ptr<Vertex>>& resultVertexes) {

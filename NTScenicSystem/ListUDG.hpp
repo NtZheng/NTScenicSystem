@@ -16,6 +16,7 @@
 
 #include "Vertex.hpp"
 #include "Edge.hpp"
+#include "ParkingLot.hpp"
 
 using namespace std;
 
@@ -56,6 +57,7 @@ public:
     void outputRoadPlanning();
     void sortedByPopularity();
     void searchWithKeyWords();
+    void parkingLotManagement();
 };
 
 

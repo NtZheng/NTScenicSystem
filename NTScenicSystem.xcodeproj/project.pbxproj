@@ -10,6 +10,7 @@
 		6A4B391F1DDEF63F003C1969 /* Edge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A4B391D1DDEF63F003C1969 /* Edge.cpp */; };
 		6A91252D1DDEEC1700C482E6 /* ListUDG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A91252B1DDEEC1700C482E6 /* ListUDG.cpp */; };
 		6A9125301DDEECE400C482E6 /* Vertex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A91252E1DDEECE400C482E6 /* Vertex.cpp */; };
+		6ACA2ED71DE9221A007BF753 /* ParkingLot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ACA2ED51DE9221A007BF753 /* ParkingLot.cpp */; };
 		6AE7873A1DDEA7B800ADE470 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AE787391DDEA7B800ADE470 /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +33,8 @@
 		6A91252C1DDEEC1700C482E6 /* ListUDG.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ListUDG.hpp; sourceTree = "<group>"; };
 		6A91252E1DDEECE400C482E6 /* Vertex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vertex.cpp; sourceTree = "<group>"; };
 		6A91252F1DDEECE400C482E6 /* Vertex.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Vertex.hpp; sourceTree = "<group>"; };
+		6ACA2ED51DE9221A007BF753 /* ParkingLot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParkingLot.cpp; sourceTree = "<group>"; };
+		6ACA2ED61DE9221A007BF753 /* ParkingLot.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ParkingLot.hpp; sourceTree = "<group>"; };
 		6AE787361DDEA7B800ADE470 /* NTScenicSystem */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = NTScenicSystem; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AE787391DDEA7B800ADE470 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,6 +76,8 @@
 				6A91252E1DDEECE400C482E6 /* Vertex.cpp */,
 				6A4B391E1DDEF63F003C1969 /* Edge.hpp */,
 				6A4B391D1DDEF63F003C1969 /* Edge.cpp */,
+				6ACA2ED61DE9221A007BF753 /* ParkingLot.hpp */,
+				6ACA2ED51DE9221A007BF753 /* ParkingLot.cpp */,
 			);
 			path = NTScenicSystem;
 			sourceTree = "<group>";
@@ -138,6 +143,7 @@
 				6A91252D1DDEEC1700C482E6 /* ListUDG.cpp in Sources */,
 				6A4B391F1DDEF63F003C1969 /* Edge.cpp in Sources */,
 				6AE7873A1DDEA7B800ADE470 /* main.cpp in Sources */,
+				6ACA2ED71DE9221A007BF753 /* ParkingLot.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
