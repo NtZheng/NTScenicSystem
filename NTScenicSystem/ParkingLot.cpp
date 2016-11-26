@@ -45,7 +45,8 @@ void ParkingLot::goOutCarStack() {
         return;
     }
     string license;
-    cout << license;
+    cout << "出场车牌号：";
+    cin >> license;
     
     // 如果便道上有车的情况
     if (popBackCarOutFromStack(license) && !carQueue.empty()) {
@@ -63,7 +64,7 @@ bool ParkingLot::popBackCarOutFromStack(const string& license) {
     unsigned size = (unsigned)carStack.size();
     for (unsigned i = 0; i < size; i++) {
         shared_ptr<car> topCar = carStack.top();
-        if (tempCar->license == license) {
+        if (topCar->license == license) {
             tempCar = topCar;
             carStack.pop();
             break;
@@ -88,9 +89,9 @@ bool ParkingLot::popBackCarOutFromStack(const string& license) {
     
     cout << "下面是离开停车场的车辆信息：" << endl;
     cout << "车辆牌号：" << tempCar->license << endl;
-    cout << "出场的时刻：" << asctime(localtime(&endTime)) << endl;
-    cout << "停车时长：" <<  asctime(localtime(&durationTime))<<endl;
-    cout << "停车花费：" << this->parkingCost(durationTime) <<endl;
+    cout << "出场的时刻：" << asctime(localtime(&endTime));
+    cout << "停车时长：" <<  durationTime;
+    cout << "停车花费：" << this->parkingCost(durationTime) << endl;
     return true;
 }
 
