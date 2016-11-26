@@ -90,7 +90,7 @@ bool ParkingLot::popBackCarOutFromStack(const string& license) {
     cout << "下面是离开停车场的车辆信息：" << endl;
     cout << "车辆牌号：" << tempCar->license << endl;
     cout << "出场的时刻：" << asctime(localtime(&endTime));
-    cout << "停车时长：" <<  durationTime;
+    cout << "停车时长：" <<  durationTime << " 秒" << endl;
     cout << "停车花费：" << this->parkingCost(durationTime) << endl;
     return true;
 }
