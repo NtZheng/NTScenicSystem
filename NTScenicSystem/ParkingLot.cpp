@@ -23,6 +23,7 @@ void ParkingLot::management() {
         } else if (select == 'D') {
             this->goOutCarStack();
         } else if (select == 'E') {
+            cout << endl << "请继续选择操作：" << endl;
             break;
         } else {
             cout << "无法识别输入的指令，请重新输入：" << endl;
@@ -31,12 +32,9 @@ void ParkingLot::management() {
 }
 
 inline void ParkingLot::printWelcomeWords() {
-    cout << "\t\t** 停车场管理程序 **\n";
+    cout << "\t\t\t\t\t** 停车场管理程序 **\n";
     cout << "============================================================\n";
-    cout << "**\t\t\t\t\t\t\t**\n";
-    cout << "**\tA --- 汽车 进 车场\tD --- 汽车 出 车场\t**\n";
-    cout << "**\t\t\t\t\t\t\t**\n";
-    cout << "**\t\t\tE --- 退出 程序\t\t\t**\n";
+    cout << "A --- 汽车 进 车场\tD --- 汽车 出 车场\tE --- 退出 程序\n";
     cout << "============================================================" << endl;
     cout << " 请选择：<A,D,E>:";
 }
