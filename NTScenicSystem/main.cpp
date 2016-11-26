@@ -45,7 +45,7 @@ int main(int argc, const char * argv[]) {
                 listUDG->sortedByPopularity();
                 break;
             case 8:
-                
+                listUDG->searchWithKeyWords();
                 break;
             case 9:
                 

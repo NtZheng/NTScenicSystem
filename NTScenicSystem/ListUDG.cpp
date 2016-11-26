@@ -18,7 +18,7 @@ void ListUDG::creatGraph() {
     
     auto& tempAllVertexes = *this->allVertexes;
 
-    ifstream in("/Users/Nineteen/Documents/SourceTree/NTScenicSystem/NTScenicSystem/test.txt");
+    ifstream in("/Users/nineteen/Documents/SourceTree/NTScenicSystem.git/NTScenicSystem/test.txt");
     
     in >> this->vertexNumber >> this->edgeNumber;
     
@@ -229,7 +229,76 @@ void ListUDG::sortedByPopularity() {
     cout << endl << "请继续选择操作:" << endl;
 }
 
+void ListUDG::searchWithKeyWords() {
+    if (isGraphEmpth()) {
+        return;
+    }
+    cout << "请输入你要查找的关键字：" << endl;
+    string key;
+    cin >> key;
+    vector<shared_ptr<Vertex>> resultVertexes;
+    queryWords(key, resultVertexes);
+    if (resultVertexes.empty()) {
+        cout << "没有与" << key << "相关的内容" << endl;
+        cout << endl << "请继续选择操作：" << endl;
+        return;
+    }
+    cout << "含有相关信息的有：" << endl;
+    for (shared_ptr<Vertex> vertex : resultVertexes) {
+        cout << "景点：" << vertex->getName() << endl;
+        cout << "景点介绍：" << vertex->getIntroduction() << endl;
+    }
+    cout << endl << "请继续选择操作：" << endl;
+}
+
 // private
+
+void ListUDG::queryWords(const string& key, vector<shared_ptr<Vertex>>& resultVertexes) {
+    for (auto& vertex : *this->allVertexes) {
+        const string& name = vertex.first;
+        const string& introduction = vertex.second->getIntroduction();
+        if (KMP(key, name) || KMP(key, introduction)) {
+            resultVertexes.push_back(vertex.second);
+        }
+    }
+}
+
+bool ListUDG::KMP(const string& target, const string& content) {
+    unsigned targetLength = (unsigned)target.size();
+    unsigned contentLength = (unsigned)content.size();
+    if (targetLength > contentLength) {
+        return false;
+    }
+    vector<int> vi;
+    computePrefixFunction(vi, target);
+    int q = -1;
+    for (unsigned i = 0; i < contentLength; i++) {
+        while (q > -1 && target[q + 1] != content[i]) {
+            q = vi[q];
+        }
+        if (target[q + 1] == content[i]) {
+            ++q;
+        }
+        if (q == targetLength - 1) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void ListUDG::computePrefixFunction(vector<int>& vi, const string& str) {
+    vi.resize(str.size());
+    unsigned m = (unsigned)str.size();
+    vi[0] = -1;
+    int k = -1;
+    for (unsigned q = 1; q < m; ++q) {
+        while (k >= 0 && str[k + 1] != str[q])
+            k = vi[k];
+        if (str[k + 1] == str[q])
+            ++k;
+        vi[q] = k;
+    }
+}
 
 void ListUDG::quickSort(vector<shared_ptr<Vertex>>& vertexes, unsigned from, unsigned to) {
     if (to - from < 4) {

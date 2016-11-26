@@ -56,6 +56,10 @@ public:
         return this->name;
     }
     
+    const string& getIntroduction() {
+        return this->introduction;
+    }
+    
     unsigned getWelcomeStar() {
         return this->welcomeStar;
     }

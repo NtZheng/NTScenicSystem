@@ -40,7 +40,10 @@ private:
     void quickSort(vector<shared_ptr<Vertex>>&, unsigned, unsigned);
     void insertSort(vector<shared_ptr<Vertex>>&, unsigned, unsigned);
     unsigned partitionForQuickSort(vector<shared_ptr<Vertex>>&, unsigned, unsigned);
-
+    void queryWords(const string&, vector<shared_ptr<Vertex>>&);
+    bool KMP(const string&, const string&);
+    void computePrefixFunction(vector<int>&, const string&);
+    
 public:
     // 构造函数（对allVertexes和allEdges进行初始化）
     ListUDG() : allVertexes(make_shared<unordered_map<string, shared_ptr<Vertex>>>()), allEdges(make_shared<vector<shared_ptr<Edge>>>()), vertexNames(make_shared<vector<string>>()), tourGuideLine(make_shared<list<shared_ptr<Vertex>>>()){}
@@ -52,6 +55,7 @@ public:
     void miniDistance();
     void outputRoadPlanning();
     void sortedByPopularity();
+    void searchWithKeyWords();
 };
 
 
