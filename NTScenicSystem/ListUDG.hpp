@@ -29,6 +29,7 @@ private:
     shared_ptr<Matrix> adjacentMatrix;
     shared_ptr<vector<string>> vertexNames;
     shared_ptr<list<shared_ptr<Vertex>>> tourGuideLine;
+    shared_ptr<ParkingLot> parkingLot;
     unsigned vertexNumber;
     unsigned edgeNumber;
     
@@ -47,7 +48,7 @@ private:
     
 public:
     // 构造函数（对allVertexes和allEdges进行初始化）
-    ListUDG() : allVertexes(make_shared<unordered_map<string, shared_ptr<Vertex>>>()), allEdges(make_shared<vector<shared_ptr<Edge>>>()), vertexNames(make_shared<vector<string>>()), tourGuideLine(make_shared<list<shared_ptr<Vertex>>>()){}
+    ListUDG() : allVertexes(make_shared<unordered_map<string, shared_ptr<Vertex>>>()), allEdges(make_shared<vector<shared_ptr<Edge>>>()), vertexNames(make_shared<vector<string>>()), tourGuideLine(make_shared<list<shared_ptr<Vertex>>>()), parkingLot(make_shared<ParkingLot>()){}
     
     void creatGraph();
     void outputGraph();

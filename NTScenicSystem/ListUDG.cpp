@@ -252,7 +252,7 @@ void ListUDG::searchWithKeyWords() {
 }
 
 void ListUDG::parkingLotManagement() {
-    
+    this->parkingLot->management();
 }
 
 // private

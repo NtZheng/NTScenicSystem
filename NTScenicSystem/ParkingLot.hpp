@@ -23,7 +23,7 @@ struct car {
     car(string license, chrono::system_clock::time_point startTime) : license(license), startTime(startTime){};
 };
 
-class parkingLot {
+class ParkingLot {
 public:
     void management(); // 总入口
     parkingLot(unsigned s = 5) : capacity(s) {};

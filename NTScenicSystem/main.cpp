@@ -48,7 +48,7 @@ int main(int argc, const char * argv[]) {
                 listUDG->searchWithKeyWords();
                 break;
             case 9:
-                
+                listUDG->parkingLotManagement();
                 break;
             case 0:
                 
